@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # 设置保存视频的路径
-save_path = '/Users/macosx/Desktop/项目文档/python-demo/files/youtube-video'
+save_path = '/reptile_data/files/youtube-video'
 
 # 创建保存路径文件夹（如果不存在）
 os.makedirs(save_path, exist_ok=True)

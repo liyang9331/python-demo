@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-dir = "/Users/macosx/Desktop/项目文档/python-demo/files/app_logos"
+dir = "/reptile_data/files/app_logos"
 # 创建保存图片的文件夹
 if not os.path.exists(dir):
     os.makedirs(dir)

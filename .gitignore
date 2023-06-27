@@ -1,2 +1,5 @@
-files
+reptile_data/files
+*.zip
+*.json
 .DS_Store
+reptile_data
