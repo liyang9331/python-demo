@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import os
 
 # 设置要爬取图片的 URL
 url = 'https://www.woyaogexing.com/touxiang/'
@@ -13,7 +12,7 @@ soup = BeautifulSoup(response.content, 'html.parser')
 img_links = []
 # print(soup)
 for img in soup.find_all('img'):
-    img_links.append("https:"+img.get('src'))
+    img_links.append("https:" + img.get('src'))
 
 # 创建保存图片的文件夹
 # if not os.path.exists('images'):

@@ -1,12 +1,15 @@
 # # 导入依赖库
 import json
-from bs4 import BeautifulSoup
 import time
+from datetime import datetime, timedelta
+
+from bs4 import BeautifulSoup
+from loguru import logger
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime, timedelta
+from selenium.webdriver.support.ui import WebDriverWait
+
 # 工具函数-下载图片
 from utils.download_image import download_image
 
@@ -35,11 +38,11 @@ for i in range(1):
             EC.presence_of_element_located((By.XPATH, "//button[@data-testid='GDPR-accept']")))
         accept.click()
     finally:
-        print("")
+        logger.debug("")
     # 等待加载更多按钮出现
     button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='search-show-more-button']")))
-    # print(button)
+    # logger.debug(button)
     # 模拟点击按钮多次加载更多数据
     while button.is_enabled():
         time.sleep(2)  # 等待一段时间，确保页面加载完毕
@@ -56,18 +59,18 @@ for i in range(1):
     list_news = soup.find_all('li', {"class": "css-1l4w6pd"})
 
     for index, item in enumerate(list_news):
-        # print(item)
+        logger.debug(item)
         # 抓取图片
         image_key = image_key + 1
         url_element = item.find('img', {"class": "css-rq4mmj"})
         image_url = url_element['src'] if url_element else ""
-        # print(url)
+        # logger.debug(url)
         if image_url:
-            # print(url)
+            # logger.debug(url)
             # # 下载图片
             #
             filename = f"{image_key}.jpg"
-            # print(filename)
+            # logger.debug(filename)
             # sys.exit()
             download_image(image_url, f'{fileDir}images/{filename}')
             # 抓取文字
@@ -81,7 +84,7 @@ for i in range(1):
                 "imageName": filename
             }
             data.append(news)
-# print(data)
+# logger.debug(data)
 # 将数据保存到文件中
 with open(f'{fileDir}data.json', "w", encoding="utf-8") as file:
     json.dump(data, file, indent=2, ensure_ascii=False)

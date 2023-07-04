@@ -1,7 +1,6 @@
 # 导入依赖库
 import requests
 from bs4 import BeautifulSoup
-import os
 
 # 确定要爬取的网址
 url = "https://play.google.com/store/apps"
@@ -24,16 +23,14 @@ for app_link in app_links:
     url = f'https://play.google.com{app_link}'
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
-    
+
     # 在详情页面中找到 logo 图片链接
     logo = soup.find('img', {'class': 'T75of nm4vBd arM4bb'})['src']
-    
+
     # 下载图片
     dir = "/Users/macosx/Desktop/项目文档/python-demo/Crawlmages/app_logos"
     response = requests.get(logo)
-    filename = f"{soup.find('h1',{'class':'Fd93Bb ynrBgc xwcR9d'}).find('span').text}.png"
+    filename = f"{soup.find('h1', {'class': 'Fd93Bb ynrBgc xwcR9d'}).find('span').text}.png"
     with open(f'{dir}/{filename}', 'wb') as f:
         f.write(response.content)
         print(f"Saved {filename}")
-
-

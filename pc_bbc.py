@@ -1,8 +1,9 @@
 # 导入依赖库
-import requests
-from bs4 import BeautifulSoup
 # import os
 import json
+
+import requests
+from bs4 import BeautifulSoup
 
 from utils.download_image import download_image
 
